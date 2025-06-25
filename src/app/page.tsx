@@ -1,13 +1,20 @@
-import Image from "next/image";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-
+import SidebarNav from "../components/layout/SidebarNav"; // tambahkan ini
+import AboutSection from "../components/section/AboutSection";
+import HeroSection from "../components/section/HeroSection";
+import SkillSection from "../components/section/SkillSection";
+import ProjectSection from "../components/section/ProjectSection";
+import ContactSection from "../components/section/ContactSection";
 
 export default function Home() {
   return (
     <>
-    <Navbar />
-    <HeroSection />
+      <SidebarNav />
+      <HeroSection />
+      <AboutSection />
+      <SkillSection />
+      <ProjectSection />
+      <ContactSection />
+
     </>
   );
 }
