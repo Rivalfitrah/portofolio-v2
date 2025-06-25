@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import { cn } from "@/app/components/lib/utils";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 

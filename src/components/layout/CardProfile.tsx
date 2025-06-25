@@ -1,41 +1,96 @@
+// components/layout/CardProfileNew.jsx
+'use client';
+
 import { Github, Instagram, Linkedin } from "lucide-react";
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 function CardProfile() {
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  interface RotateState {
+    x: number;
+    y: number;
+  }
+
+  interface MouseMoveEvent extends React.MouseEvent<HTMLDivElement, MouseEvent> {}
+
+  const handleMouseMove = (e: MouseMoveEvent) => {
+    if (!cardRef.current) return;
+
+    const card = cardRef.current;
+    const { width, height, left, top } = card.getBoundingClientRect();
+    const x = e.clientX - left - width / 2;
+    const y = e.clientY - top - height / 2;
+
+    // Menentukan seberapa besar rotasi yang diinginkan
+    const rotateX = (y / (height / 2)) * -10; // Invert Y-axis
+    const rotateY = (x / (width / 2)) * 10;
+
+    setRotate({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 });
+  };
+
   return (
     <motion.div
-  initial={{ opacity: 0, x: 100 }}          // posisi awal (dari kanan & transparan)
-  whileInView={{ opacity: 1, x: 0 }}        // animasi saat masuk layar
-  viewport={{ once: true, amount: 0.3 }}    // jalankan sekali saat 30% elemen terlihat
-  transition={{ duration: 0.8, ease: "easeOut" }}
-    className="w-full max-w-sm text-center p-6 rounded-2xl backdrop-blur-md bg-gradient-to-b from-[#1e293b]/60 to-[#0f172a]/70 border border-blue-500/20 shadow-lg">
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(1.05)`,
+        transition: "transform 0.1s ease-out",
+      }}
+      initial={{ opacity: 0, x: 100, scale: 0.9 }}
+      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="w-full max-w-xs text-center p-6 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-slate-800/60 to-slate-900/70 border border-blue-500/30 shadow-2xl shadow-blue-500/10"
+    >
       {/* Profile Image */}
-      <div className="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-blue-400 shadow-md mb-4">
+      <div className="relative w-32 h-32 mx-auto mb-5">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 blur-md animate-pulse"></div>
         <img
-          src="/vercel.svg"
-          alt="Profile"
-          className="w-full h-full object-cover"
+          src="/img/profile.png" // Ganti dengan URL foto profilmu
+          alt="Profile Rival"
+          className="relative w-full h-full object-cover rounded-full border-4 border-slate-700"
         />
       </div>
 
       {/* Name & Role */}
-      <h2 className="text-2xl font-bold text-white">Rival</h2>
-      <p className="text-blue-400 font-medium mt-1">Software Developer</p>
+      <h2 className="text-3xl font-bold text-white">Rival</h2>
+      <p className="text-blue-400 font-semibold mt-1 tracking-wide">
+        Software Developer
+      </p>
 
       {/* Availability */}
-      <p className="mt-2 text-sm text-gray-300 italic">Available for freelancer</p>
+      <div className="flex items-center justify-center gap-2 mt-3 text-sm text-gray-300">
+        <span className="relative flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+        </span>
+        Available for Freelance
+      </div>
 
       {/* Social Icons */}
-      <div className="flex justify-center gap-4 mt-6">
-        {[Github, Instagram, Linkedin].map((Icon, idx) => (
-          <a
+      <div className="flex justify-center gap-5 mt-8">
+        {[
+          { Icon: Github, href: "#" },
+          { Icon: Instagram, href: "#" },
+          { Icon: Linkedin, href: "#" },
+        ].map(({ Icon, href }, idx) => (
+          <motion.a
             key={idx}
-            href="#"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500/10 hover:bg-blue-500/30 border border-blue-400/30 transition-colors"
+            href={href}
+            whileHover={{ scale: 1.15, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-slate-700/50 hover:bg-blue-500/50 border border-blue-400/40"
           >
-            <Icon className="text-blue-300" size={20} />
-          </a>
+            <Icon className="text-blue-300" size={24} />
+          </motion.a>
         ))}
       </div>
     </motion.div>

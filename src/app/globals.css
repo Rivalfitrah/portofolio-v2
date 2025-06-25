@@ -135,3 +135,19 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes border-spin {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-border-spin {
+    background-size: 300% 300%;
+    animation: border-spin 4s linear infinite;
+  }
+}
