@@ -82,9 +82,11 @@ export default function SidebarNav() {
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="fixed top-1/2 -translate-y-1/2 left-4 z-50" // Disesuaikan sedikit untuk posisi
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50
+                 md:left-16 md:top-1/2 md:-translate-y-1/2 md:bottom-auto md:transform-none" 
     >
-      <nav className="bg-[#111111]/70 backdrop-blur-sm border border-gray-700 rounded-full px-3 py-6 flex flex-col items-center gap-6 shadow-lg shadow-black/30">
+      <nav className="flex flex-row items-center gap-4 rounded-full bg-[#111111]/70 p-3 backdrop-blur-sm border border-gray-700 shadow-lg shadow-black/30
+                   md:flex-col md:gap-6 md:p-3 md:py-6">
         {navItems.map(({ icon: Icon, name }) => (
           <button
             key={name}
