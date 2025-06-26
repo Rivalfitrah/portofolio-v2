@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-const navItems = [
+export const navItems = [
   { icon: Home, name: "home" },
   { icon: User, name: "about" },
   { icon: BadgeCheck, name: "skills" },
@@ -71,9 +71,6 @@ export default function SidebarNav() {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
-      // Kita tidak perlu setActive(id) di sini lagi,
-      // karena IntersectionObserver akan menanganinya secara otomatis saat scrolling selesai.
-      // Ini mencegah "kedipan" di mana state di-set oleh klik, lalu langsung di-set lagi oleh observer.
     }
   };
 

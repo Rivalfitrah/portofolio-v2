@@ -7,6 +7,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
@@ -41,14 +43,15 @@ export default function Page() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
+        <main className="flex-1 overflow-y-auto p-4">
+          <h1 className="text-2xl font-semibold mb-4">Prpject</h1>
+          <div className="flex items-center justify-between mb-4 mx-5">
+            <Button className="bg-blue-500 text-white p-5 hover:bg-blue-600 ">New Item</Button>
+
+
           </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
-        </div>
+          
+        </main>
       </SidebarInset>
     </SidebarProvider>
   )

@@ -64,11 +64,11 @@ export default function Footer() {
               <div className="space-y-3">
                 <a href="mailto:youremail@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors">
                   <Mail size={20} className="text-cyan-400" />
-                  <span>youremail@gmail.com</span>
+                  <span>rivalfitrah9@gmail.com</span>
                 </a>
                 <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
                   <Instagram size={20} className="text-cyan-400" />
-                  <span>@yourusername</span>
+                  <span>@</span>
                 </a>
                 <div className="flex items-center gap-3">
                   <MapPin size={20} className="text-cyan-400" />
@@ -98,15 +98,11 @@ export default function Footer() {
 
         {/* Garis Pemisah & Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-sm">
-          <p className="flex items-center gap-2">
+          <p className="flex items-center text-center justify-center gap-2">
             <Copyright size={16} />
-            <span>{currentYear} Rival. All rights reserved.</span>
-          </p>
-          <p className="mt-4 sm:mt-0">
-            Dibuat dengan ❤️ di Karangtengah.
+            <span className='text-center'>{currentYear} Rival. All rights reserved.</span>
           </p>
         </div>
-
       </div>
     </footer>
   );
