@@ -4,9 +4,10 @@ import { Github, Link } from "lucide-react";
 import type { Project as ProjectType } from "../section/ProjectSection";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Proyek } from "../ui/dashboard/TableProyek";
 
 type ProjectCardProps = {
-  project: ProjectType;
+  project: Proyek
 };
 
 function ProjectCard({ project }: ProjectCardProps) {

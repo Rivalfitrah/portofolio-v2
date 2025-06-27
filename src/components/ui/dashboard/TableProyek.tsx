@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { FormProyek } from './FormProyek'
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { FormDataType, FormProyek } from './FormProyek'
+import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase' // Pastikan path ini sesuai dengan lokasi file firebase.ts Anda
 import Swal from 'sweetalert2'
 
@@ -73,6 +73,37 @@ function TableProyek() {
 
     }
 
+    const handleUpdate = async (id: string, data: FormDataType) => {
+        try {
+            const docRef = doc(db, "projects", id)
+            await updateDoc(docRef, {
+                title: data.title,
+                description: data.description,
+                githubUrl: data.githubUrl,
+                liveUrl: data.liveUrl,
+                imageSrc: data.imageSrc as string, // Pastikan ini adalah URL string
+                technologies: data.technologies
+                .split(",")
+                .map((tech) => tech.trim())
+                .filter((tech) => tech !== ""),
+                })
+            Swal.fire({
+                title: 'Berhasil',
+                text: 'Proyek berhasil diperbarui.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+        } catch (error) {
+            console.error("Gagal memperbarui proyek:", error)
+            Swal.fire({
+                title: 'Gagal',
+                text: 'Terjadi kesalahan saat memperbarui proyek.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+        }
+    }
+
   return (
     <div className='overflow-x-auto'>
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
@@ -131,6 +162,7 @@ function TableProyek() {
                 technologies: project.technologies.join(", "),
               }}
               onSubmit={(data) => {
+                handleUpdate(project.id, data)
                 console.log("Update proyek:", data);
               }}
             />

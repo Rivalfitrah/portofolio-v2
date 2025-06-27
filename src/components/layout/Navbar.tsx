@@ -22,7 +22,6 @@ function Navbar() {
     <nav className={`text-white p-6 shadow-md border-b border-white/10 fixed top-0 left-0 w-full z-50 ${isScrolled ? "backdrop-blur-md bg-black/50" : "bg-transparent"}`}
     
     >
-
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Logo / Brand */}
         <motion.div
