@@ -2,16 +2,19 @@
 
 import * as React from "react"
 import {
+  Atom,
   AudioWaveform,
   BookOpen,
   Bot,
   Command,
+  Folder,
   Frame,
   GalleryVerticalEnd,
   Map,
   PieChart,
   Settings2,
   SquareTerminal,
+  User,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -139,19 +142,19 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: "Proyek",
+      url: "/dashboard",
+      icon: Folder,
     },
     {
-      name: "Sales & Marketing",
+      name: "Skills",
       url: "#",
-      icon: PieChart,
+      icon: Atom,
     },
     {
-      name: "Travel",
+      name: "Profile",
       url: "#",
-      icon: Map,
+      icon: User,
     },
   ],
 }

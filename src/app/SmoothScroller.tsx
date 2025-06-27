@@ -1,26 +1,35 @@
 // app/components/SmoothScroller.tsx
 'use client' // Komponen ini harus berjalan di client
 
-import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
+import Lenis from 'lenis'
 import { useEffect } from 'react'
 
 // Kita terima 'children' agar bisa membungkus seluruh halaman kita
-function SmoothScroller({ children }: { children: React.ReactNode }) {
+function SmoothScroller( { children }: { children: React.ReactNode }) {
+  // Initialize Lenis
+const lenis = new Lenis({
+  autoRaf: true,
+});
 
-  // Opsi untuk kustomisasi Lenis.
-  // lerp: seberapa "lembut" scroll-nya. Nilai lebih rendah = lebih lembut.
-  // duration: durasi animasi scroll saat menggunakan lenis.scrollTo()
-  const options = {
-    lerp: 0.1,
-    duration: 1.5,
-    smoothTouch: true, // Mengaktifkan smooth scroll di perangkat sentuh
-  }
+// Listen for the scroll event and log the event data
+lenis.on('scroll', (e) => {
+  console.log(e);
+});
 
-  return (
-    <ReactLenis root options={options}>
-      {children}
-    </ReactLenis>
-  )
+  // Gunakan useEffect untuk menginisialisasi Lenis saat komponen dimount
+  useEffect(() => {
+    // Start Lenis
+    lenis.start();
+
+    // Cleanup function to stop Lenis when the component unmounts
+    return () => {
+      lenis.stop();
+    };
+  }, []);
+
+  // Render children yang dibungkus oleh div dengan class 'smooth-scroller'
+  return <div className="smooth-scroller">{children}</div>;
+
 }
 
 export default SmoothScroller

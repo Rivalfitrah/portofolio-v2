@@ -1,4 +1,6 @@
+'use client'
 import { AppSidebar } from "@/components/app-sidebar"
+import AuthGuard from "@/components/AuthGuard"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
+import {FormProyek} from "@/components/ui/dashboard/FormProyek"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -15,9 +18,21 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 
 export default function Page() {
+
   return (
+    <>
+    <AuthGuard >
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
@@ -44,15 +59,13 @@ export default function Page() {
           </div>
         </header>
         <main className="flex-1 overflow-y-auto p-4">
-          <h1 className="text-2xl font-semibold mb-4">Prpject</h1>
-          <div className="flex items-center justify-between mb-4 mx-5">
-            <Button className="bg-blue-500 text-white p-5 hover:bg-blue-600 ">New Item</Button>
-
-
-          </div>
+          <h1 className="text-2xl font-semibold mb-4">My Proyek</h1>
+          <FormProyek />
           
         </main>
       </SidebarInset>
     </SidebarProvider>
+    </AuthGuard>
+    </>
   )
 }
