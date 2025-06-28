@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FormDataType, FormProyek } from './FormProyek'
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
-import { db } from '@/lib/firebase' // Pastikan path ini sesuai dengan lokasi file firebase.ts Anda
+import { db } from '@/lib/firebase' 
 import Swal from 'sweetalert2'
 
 export type Proyek = {

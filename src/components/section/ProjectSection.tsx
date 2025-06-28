@@ -1,6 +1,5 @@
 'use client'
 
-import { Github, Link } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import ProjectCard from '../layout/ProjectCard';
 import { Proyek } from '../ui/dashboard/TableProyek';

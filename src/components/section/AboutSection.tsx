@@ -2,7 +2,7 @@
 
 'use client';
 import React from "react";
-import CardProfileNew from "@/components/layout/CardProfile"; // Ganti dengan komponen baru
+import CardProfileNew from "@/components/layout/CardProfile"; 
 import { Download } from "lucide-react";
 import { cubicBezier, motion } from "framer-motion";
 
@@ -11,7 +11,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // Animasi anak elemen akan muncul berurutan
+      staggerChildren: 0.2, 
     },
   },
 };

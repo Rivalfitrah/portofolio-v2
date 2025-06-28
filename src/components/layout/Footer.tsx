@@ -1,10 +1,7 @@
 // app/components/Footer.tsx
 
 import React from 'react';
-import { 
-  CodeXml, 
-  Type, 
-  Wind, 
+import {
   Instagram, 
   Mail, 
   MapPin,

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
 import { motion } from 'framer-motion'
-import { navItems } from './SidebarNav'
 
 function Navbar() {
    const [isScrolled, setIsScrolled] = useState(false);
