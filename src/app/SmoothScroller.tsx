@@ -13,7 +13,6 @@ function SmoothScroller( { children }: { children: React.ReactNode }) {
       autoRaf: true,
     });
     lenis.on('scroll', (e: any) => {
-      console.log(e);
     });
     lenis.start();
     return () => {

@@ -29,6 +29,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { removeItem } from "framer-motion"
+import { useRouter } from "next/navigation"
+import Swal from "sweetalert2"
 
 export function NavUser({
   user,
@@ -40,6 +43,34 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+
+  const handleLogout = () => {
+  Swal.fire({
+    title: "Logout",
+    text: "Are you sure you want to log out?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, log out",
+    cancelButtonText: "No, cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Hapus token dari localStorage
+      localStorage.removeItem("UID")
+      localStorage.removeItem("token")
+
+      // Tampilkan pesan sukses lalu redirect
+      Swal.fire({
+        title: "Logged out",
+        text: "You have been logged out successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        router.push("/login") // Baru redirect setelah user klik "OK"
+      })
+    }
+  })
+}
 
   return (
     <SidebarMenu>
@@ -103,8 +134,10 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <LogOut />
-              Log out
+              <LogOut/>
+              <button onClick={handleLogout} className="w-full text-left">
+                Log out
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

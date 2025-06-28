@@ -46,7 +46,7 @@ function AboutSection() {
           className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 items-center"
         >
           {/* Kolom Kiri: Deskripsi dan Aksi */}
-          <div className="lg:col-span-3 space-y-8 text-center lg:text-left">
+          <div className="order-2 lg:order-1 lg:col-span-3 space-y-8 text-center lg:text-left">
             <motion.h2 
               variants={itemVariants}
               className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400"
@@ -75,7 +75,7 @@ function AboutSection() {
           </div>
 
           {/* Kolom Kanan: Card Profile */}
-          <div className="lg:col-span-2 flex justify-center items-center">
+          <div className="order 1 lg:order-2 lg:col-span-2 flex justify-center items-center">
             {/* CardProfileNew sudah memiliki animasi masuknya sendiri */}
             <CardProfileNew /> 
           </div>
