@@ -18,34 +18,27 @@ export type Project = {
     technologies: string[];
 }
 
-const DataProjects: Project[] = [
-    {
-    id: 1,
-    title: "project 1",
-    description: "lorem ipsum",
-    imageSrc: "/img/peakpx.jpg",
-    githubUrl: "https://github.com/rivalfitrah",
-    liveUrl: "https://example.com",
-    technologies: ["React", "Next.js", "Tailwind CSS"]
-    },
-    {
-    id: 2,
-    title: "project 1",
-    description: "lorem ipsum",
-    imageSrc: "/img/peakpx.jpg",
-    githubUrl: "https://github.com/rivalfitrah",
-    liveUrl: "https://example.com",
-    technologies: ["React", "Next.js", "Tailwind CSS"]
+// const DataProjects: Project[] = [
+//     {
+//     id: 1,
+//     title: "project 1",
+//     description: "lorem ipsum",
+//     imageSrc: "/img/peakpx.jpg",
+//     githubUrl: "https://github.com/rivalfitrah",
+//     liveUrl: "https://example.com",
+//     technologies: ["React", "Next.js", "Tailwind CSS"]
+//     },
+//     {
+//     id: 2,
+//     title: "project 1",
+//     description: "lorem ipsum",
+//     imageSrc: "/img/peakpx.jpg",
+//     githubUrl: "https://github.com/rivalfitrah",
+//     liveUrl: "https://example.com",
+//     technologies: ["React", "Next.js", "Tailwind CSS"]
     
-    }
-];
-
-
-
-
-
-
-
+//     }
+// ];
 
 function ProjectSection() {
   const [projects, setProjects] = useState<Proyek[]>([])
@@ -79,7 +72,7 @@ function ProjectSection() {
           <div className="text-center text-white py-10">No projects found.</div>
         ) : (
           // Tampilan saat data ada
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8"> {/* <-- saya ganti gap menjadi 8 agar lebih rapi */}
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8"> 
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}

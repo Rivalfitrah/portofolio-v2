@@ -35,7 +35,7 @@ function SkillSection() {
     <section className="min-h-screen py-16 bg-black" id='skills'>
       <div className="max-w-7xl mx-auto px-4">
         <motion.h2
-        initial={{ y: -50, opacity: 0 }}
+        initial={{ y: -100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -45,6 +45,7 @@ function SkillSection() {
 
         <motion.div
           variants={containerVariants}
+          transition={{ duration: 0.5 }}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
