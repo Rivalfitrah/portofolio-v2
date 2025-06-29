@@ -29,6 +29,8 @@ function ProjectCard({ project }: ProjectCardProps) {
             src={project.imageSrc}
             alt={project.title}
             className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" // Efek zoom saat hover
+            width={400} // Ganti dengan ukuran yang sesuai
+            height={200} // Ganti dengan ukuran yang sesuai
           />
           {/* 2. Ikon Link (Github, dll) */}
           <div className="absolute top-3 left-3 z-20 flex gap-2">

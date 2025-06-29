@@ -58,6 +58,8 @@ function CardProfile() {
           src="/img/profile.png" // Ganti dengan URL foto profilmu
           alt="Profile Rival"
           className="relative w-full h-full object-cover rounded-full border-4 border-slate-700"
+          width={128}
+          height={128}
         />
       </div>
 

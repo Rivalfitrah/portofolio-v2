@@ -69,7 +69,7 @@ function SkillSection() {
               viewport={{ once: true, amount: 0.3 }}
               
               className="w-16 h-16 rounded-full border border-blue-500/60 flex items-center justify-center mb-4">
-                <Image src={skill.icon} alt={skill.name} className="w-8 h-8" />
+                <Image width={100} height={100} src={skill.icon} alt={skill.name} className="w-8 h-8" />
               </motion.div>
               <h3 className="text-white text-center font-semibold">{skill.name}</h3>
             </div>
