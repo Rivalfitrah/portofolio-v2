@@ -59,13 +59,13 @@ export default function Footer() {
                 Contack me & Location
               </h3>
               <div className="space-y-3">
-                <a href="mailto:youremail@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors">
+                <a href="mailto:rivalfitrahdermawan@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors">
                   <Mail size={20} className="text-cyan-400" />
-                  <span>rivalfitrah9@gmail.com</span>
+                  <span>rivalfitrahdermawan@gmail.com</span>
                 </a>
-                <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
+                <a href="https://www.instagram.com/_rvlfd_9/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
                   <Instagram size={20} className="text-cyan-400" />
-                  <span>@</span>
+                  <span>@_rvlfd_9</span>
                 </a>
                 <div className="flex items-center gap-3">
                   <MapPin size={20} className="text-cyan-400" />
