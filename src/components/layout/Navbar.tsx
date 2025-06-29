@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 function Navbar() {
    const [isScrolled, setIsScrolled] = useState(false);
@@ -28,8 +29,10 @@ function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         whileHover={{ scale: 1.05 }}
-        className="text-2xl font-semibold tracking-wide">
+        className="text-2xl font-semibold tracking-wide cursor-pointer">
+        <a href="/">
           <span className="text-blue-400">My</span> Portfolio
+        </a>
         </motion.div>
 
         {/* CTA Button */}
