@@ -10,7 +10,7 @@ function SkillSection() {
     { name: "React", icon: "https://cdn.simpleicons.org/react" },
     { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/white" },
     { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss" },
-    { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript" },
+    // { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript" },
     { name: "Git", icon: "https://cdn.simpleicons.org/git" },
     { name: "GitHub", icon: "https://cdn.simpleicons.org/github/white" },
     { name: "Figma", icon: "https://cdn.simpleicons.org/figma" },
