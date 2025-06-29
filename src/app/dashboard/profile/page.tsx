@@ -11,6 +11,8 @@ function page() {
         </div>
         {/* Add your profile management components here */}
 
+        
+
 
     </DashboardLayout>
   )
