@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import ProjectCard from '../layout/ProjectCard';
 import { Proyek } from '../ui/dashboard/TableProyek';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 
@@ -44,19 +44,21 @@ function ProjectSection() {
   const [projects, setProjects] = useState<Proyek[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const querySnapshot = await getDocs(collection(db, "projects"))
-      const data: Proyek[] = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Proyek, "id">),
-      }))
-      setProjects(data)
-      setLoading(false)
-    }
+useEffect(() => {
+  const q = query(collection(db, "projects"), orderBy("createdAt", "desc"))
 
-    fetchProjects()
-  }, [])
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const data: Proyek[] = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Proyek, "id">),
+    }))
+    setProjects(data)
+    setLoading(false)
+  })
+
+  // Hapus listener saat komponen di-unmount
+  return () => unsubscribe()
+}, [])
     
   return (
 <section className="min-h-screen py-16 bg-black" id='project'>

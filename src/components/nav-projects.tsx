@@ -24,6 +24,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function NavProjects({
   projects,
@@ -35,6 +37,7 @@ export function NavProjects({
   }[]
 }) {
   const { isMobile } = useSidebar()
+  const pathname = usePathname()
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -42,18 +45,19 @@ export function NavProjects({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
-              </a>
-            </SidebarMenuButton>
+          <SidebarMenuButton asChild>
+            <Link
+              href={item.url}
+              className={`flex items-center gap-2 w-full text-left ${
+                pathname === item.url ? " text-blue-500 font-semibold" : ""
+              }`}
+            >
+              <item.icon className="h-5 w-5" />
+              <span>{item.name}</span>
+            </Link>
+          </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuAction showOnHover>
-                  <MoreHorizontal />
-                  <span className="sr-only">More</span>
-                </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 className="w-48 rounded-lg"

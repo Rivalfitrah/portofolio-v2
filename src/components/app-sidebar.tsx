@@ -10,6 +10,7 @@ import {
   Folder,
   Frame,
   GalleryVerticalEnd,
+  LayoutDashboard,
   Map,
   PieChart,
   Settings2,
@@ -32,26 +33,26 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
+    name: "atmint",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      name: "Dashboard",
+      logo: LayoutDashboard,
+      plan: "",
     },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+    // {
+    //   name: "Acme Corp.",
+    //   logo: AudioWaveform,
+    //   plan: "Startup",
+    // },
+    // {
+    //   name: "Evil Corp.",
+    //   logo: Command,
+    //   plan: "Free",
+    // },
   ],
   navMain: [
     // {
@@ -148,12 +149,12 @@ const data = {
     },
     {
       name: "Skills",
-      url: "#",
+      url: "/dashboard/skill",
       icon: Atom,
     },
     {
       name: "Profile",
-      url: "#",
+      url: "/dashboard/profile",
       icon: User,
     },
   ],
@@ -165,8 +166,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
+      {/* <SidebarHeader>
+        <div className="flex items-center gap-2">
+          <LayoutDashboard className="h-6 w-6 mt-5" />
+          <span className="text-lg font-semibold mt-5">Dashboard</span>
+        </div>
+      </SidebarHeader> */}
       <SidebarContent>
-        <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
