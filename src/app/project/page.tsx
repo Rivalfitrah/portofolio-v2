@@ -6,7 +6,7 @@ import { db } from '@/lib/firebase'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 
-function page() {
+function Page() {
     const [projects, setProjects] = useState<Proyek[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -51,4 +51,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

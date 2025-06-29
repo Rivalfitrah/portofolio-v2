@@ -4,6 +4,7 @@ import { Github, Link } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Proyek } from "../ui/dashboard/TableProyek";
+import Image from "next/image";
 
 type ProjectCardProps = {
   project: Proyek
@@ -24,7 +25,7 @@ function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="p-2 bg-[#0f0f0f] rounded-xl shadow-md hover:shadow-blue-500/40 transition duration-300">
         <div className="relative group overflow-hidden rounded-xl">
-          <img
+          <Image
             src={project.imageSrc}
             alt={project.title}
             className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" // Efek zoom saat hover

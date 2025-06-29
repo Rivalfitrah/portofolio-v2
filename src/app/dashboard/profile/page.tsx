@@ -1,8 +1,7 @@
 import React from 'react'
-import Page from '../page'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 
-function page() {
+function Page() {
   return (
     <DashboardLayout breadcrumbTitle='Profile'>
         <div className="flex flex-col gap-4">
@@ -18,4 +17,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

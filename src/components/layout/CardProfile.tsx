@@ -4,6 +4,7 @@
 import { Github, Instagram, Linkedin } from "lucide-react";
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 function CardProfile() {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
@@ -53,7 +54,7 @@ function CardProfile() {
       {/* Profile Image */}
       <div className="relative w-32 h-32 mx-auto mb-5">
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 blur-md animate-pulse"></div>
-        <img
+        <Image
           src="/img/profile.png" // Ganti dengan URL foto profilmu
           alt="Profile Rival"
           className="relative w-full h-full object-cover rounded-full border-4 border-slate-700"

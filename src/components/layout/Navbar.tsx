@@ -30,9 +30,9 @@ function Navbar() {
         transition={{ duration: 0.5 }}
         whileHover={{ scale: 1.05 }}
         className="text-2xl font-semibold tracking-wide cursor-pointer">
-        <a href="/">
+        <Link href="/">
           <span className="text-blue-400">My</span> Portfolio
-        </a>
+        </Link>
         </motion.div>
 
         {/* CTA Button */}

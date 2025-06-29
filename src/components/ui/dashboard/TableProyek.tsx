@@ -3,6 +3,7 @@ import { FormDataType, FormProyek } from './FormProyek'
 import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase' 
 import Swal from 'sweetalert2'
+import Image from 'next/image'
 
 export type Proyek = {
   id: string
@@ -164,7 +165,7 @@ function TableProyek() {
               </a>
             </td>
             <td className="px-4 py-3 text-center">
-              <img
+              <Image
                 src={project.imageSrc}
                 alt={project.title}
                 className="w-12 h-12 object-cover rounded-lg mx-auto"
