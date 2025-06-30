@@ -81,9 +81,9 @@ function CardProfile() {
       {/* Social Icons */}
       <div className="flex justify-center gap-5 mt-8">
         {[
-          { Icon: Github, href: "#" },
-          { Icon: Instagram, href: "#" },
-          { Icon: Linkedin, href: "#" },
+          { Icon: Github, href: "https://github.com/rivalfitrah" },
+          { Icon: Instagram, href: "https://www.instagram.com/_rvlfd_9/" },
+          { Icon: Linkedin, href: "https://www.linkedin.com/in/rivalfitrah/" },
         ].map(({ Icon, href }, idx) => (
           <motion.a
             key={idx}
