@@ -9,10 +9,6 @@ function Page() {
             <p className="text-gray-600">Manage your profile and settings.</p>
         </div>
         {/* Add your profile management components here */}
-
-        
-
-
     </DashboardLayout>
   )
 }

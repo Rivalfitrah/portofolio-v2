@@ -1,39 +1,38 @@
-// components/layout/CardProfileNew.jsx
 'use client';
 
 import { Github, Instagram, Linkedin } from "lucide-react";
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 function CardProfile() {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  interface RotateState {
-    x: number;
-    y: number;
-  }
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-  interface MouseMoveEvent extends React.MouseEvent<HTMLDivElement, MouseEvent> {}
-
-  const handleMouseMove = (e: MouseMoveEvent) => {
-    if (!cardRef.current) return;
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!cardRef.current || isMobile) return;
 
     const card = cardRef.current;
     const { width, height, left, top } = card.getBoundingClientRect();
     const x = e.clientX - left - width / 2;
     const y = e.clientY - top - height / 2;
 
-    // Menentukan seberapa besar rotasi yang diinginkan
-    const rotateX = (y / (height / 2)) * -10; // Invert Y-axis
-    const rotateY = (x / (width / 2)) * 10;
+    const rotateX = (y / (height / 2)) * -5;
+    const rotateY = (x / (width / 2)) * 5;
 
     setRotate({ x: rotateX, y: rotateY });
   };
 
   const handleMouseLeave = () => {
-    setRotate({ x: 0, y: 0 });
+    if (!isMobile) setRotate({ x: 0, y: 0 });
   };
 
   return (
@@ -42,44 +41,42 @@ function CardProfile() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(1.05)`,
-        transition: "transform 0.1s ease-out",
+        transform: isMobile
+          ? "scale(1)"
+          : `perspective(800px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(1.02)`,
+        transition: "transform 0.2s ease",
       }}
-      initial={{ opacity: 0, x: 100, scale: 0.9 }}
-      whileInView={{ opacity: 1, x: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.5 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full max-w-xs text-center p-6 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-slate-800/60 to-slate-900/70 border border-blue-500/30 shadow-2xl shadow-blue-500/10"
+      className="w-full max-w-xs text-center p-6 rounded-3xl backdrop-blur-sm bg-gradient-to-br from-slate-800/70 to-slate-900/80 border border-blue-500/20 shadow-lg"
     >
-      {/* Profile Image */}
-      <div className="relative w-32 h-32 mx-auto mb-5">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 blur-md animate-pulse"></div>
+
+      <div className="relative w-28 h-28 mx-auto mb-5">
         <Image
-          src="/img/profile.png" // Ganti dengan URL foto profilmu
+          src="/img/profile.png"
           alt="Profile Rival"
-          className="relative w-full h-full object-cover rounded-full border-4 border-slate-700"
-          width={128}
-          height={128}
+          className="w-full h-full object-cover rounded-full border-4 border-slate-700"
+          width={112}
+          height={112}
         />
       </div>
 
-      {/* Name & Role */}
-      <h2 className="text-3xl font-bold text-white">Rival</h2>
-      <p className="text-blue-400 font-semibold mt-1 tracking-wide">
+      <h2 className="text-2xl font-bold text-white">Rival</h2>
+      <p className="text-blue-400 font-medium mt-1 tracking-wide">
         Software Developer
       </p>
 
-      {/* Availability */}
       <div className="flex items-center justify-center gap-2 mt-3 text-sm text-gray-300">
         <span className="relative flex h-3 w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
         </span>
         Available for Freelance
       </div>
 
-      {/* Social Icons */}
-      <div className="flex justify-center gap-5 mt-8">
+      <div className="flex justify-center gap-4 mt-6">
         {[
           { Icon: Github, href: "https://github.com/rivalfitrah" },
           { Icon: Instagram, href: "https://www.instagram.com/_rvlfd_9/" },
@@ -88,11 +85,11 @@ function CardProfile() {
           <motion.a
             key={idx}
             href={href}
-            whileHover={{ scale: 1.15, y: -5 }}
+            whileHover={{ scale: 1.1, y: -4 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-slate-700/50 hover:bg-blue-500/50 border border-blue-400/40"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-700/50 hover:bg-blue-500/40 border border-blue-400/20"
           >
-            <Icon className="text-blue-300" size={24} />
+            <Icon className="text-blue-300" size={20} />
           </motion.a>
         ))}
       </div>
