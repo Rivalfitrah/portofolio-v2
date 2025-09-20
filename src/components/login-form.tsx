@@ -17,6 +17,7 @@ import { sign } from "crypto"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import swal from "sweetalert2"
 import { useRouter } from "next/navigation"
+import LoginWithGoogle from "./LoginWithGoogle"
 
 export function LoginForm({ className,...props }: React.ComponentProps<"div">) {
   const [email, setEmail] = useState("")
@@ -96,6 +97,9 @@ export function LoginForm({ className,...props }: React.ComponentProps<"div">) {
               </div>
             </div>
           </form>
+      <div className="flex justify-center mt-5">
+        <LoginWithGoogle />
+      </div>
         </CardContent>
       </Card>
     </div>

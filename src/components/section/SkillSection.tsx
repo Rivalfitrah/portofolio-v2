@@ -6,17 +6,22 @@ import Image from 'next/image';
 function SkillSection() {
   const skills = [
     { name: "HTML5", icon: "https://cdn.simpleicons.org/html5" },
-    { name: "CSS3", icon: "https://cdn.simpleicons.org/css3" },
+    { name: "CSS3", icon: "https://cdn.simpleicons.org/css/blue" },
     { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript" },
     { name: "React", icon: "https://cdn.simpleicons.org/react" },
     { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/white" },
     { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss" },
-    // { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript" },
+    { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript" },
     { name: "Git", icon: "https://cdn.simpleicons.org/git" },
     { name: "GitHub", icon: "https://cdn.simpleicons.org/github/white" },
     { name: "Figma", icon: "https://cdn.simpleicons.org/figma" },
     { name: "Bootstrap", icon: "https://cdn.simpleicons.org/bootstrap" },
     { name: "Vue.js", icon: "https://cdn.simpleicons.org/vue.js" },
+    { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs" },
+    { name: "Express.js", icon: "https://cdn.simpleicons.org/express/white" },
+    { name: "prisma", icon: "https://cdn.simpleicons.org/prisma/white" },
+    { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb" },
+    { name: "Firebase", icon: "https://cdn.simpleicons.org/firebase" },
   ];
 
   const containerVariants = {

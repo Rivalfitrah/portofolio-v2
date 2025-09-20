@@ -168,6 +168,8 @@ function TableProyek() {
               <Image
                 src={project.imageSrc}
                 alt={project.title}
+                width={50}
+                height={50}
                 className="w-12 h-12 object-cover rounded-lg mx-auto"
               />
             </td>
