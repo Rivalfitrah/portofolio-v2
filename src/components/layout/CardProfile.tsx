@@ -52,7 +52,6 @@ function CardProfile() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-full max-w-xs text-center p-6 rounded-3xl backdrop-blur-sm bg-gradient-to-br from-slate-800/70 to-slate-900/80 border border-blue-500/20 shadow-lg"
     >
-
       <div className="relative w-28 h-28 mx-auto mb-5">
         <Image
           src="/img/profile.png"
