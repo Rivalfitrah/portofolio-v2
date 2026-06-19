@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function Navbar() {
    const [isScrolled, setIsScrolled] = useState(false);
@@ -31,6 +32,7 @@ function Navbar() {
         whileHover={{ scale: 1.05 }}
         className="text-2xl font-semibold tracking-wide cursor-pointer">
         <Link href="/">
+          <Image src="/logo.svg" alt="Logo" width={50} height={60} className="inline-block mr-2" />
           <span className="text-blue-400">My</span> Portfolio
         </Link>
         </motion.div>
