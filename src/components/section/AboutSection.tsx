@@ -58,26 +58,23 @@ function AboutSection() {
               variants={itemVariants}
               className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
-              Saya adalah seorang individu yang memiliki minat besar dalam
-              bidang teknologi, khususnya dalam pengembangan perangkat lunak dan
-              pemanfaatan teknologi untuk menyelesaikan masalah nyata.
-              Berpengalaman dalam membangun proyek digital baik secara individu
-              maupun tim, saya terbiasa bekerja dengan berbagai teknologi modern
-              Saya terus bersemangat untuk belajar hal-hal baru,
-              mengikuti tren teknologi terkini, dan mengembangkan solusi
-              inovatif yang berdampak positif. Dengan latar belakang pendidikan
-              di bidang teknologi dan kemampuan analitis yang kuat, saya siap
-              berkontribusi dalam lingkungan kerja yang dinamis dan kolaboratif.
+            Software Engineering student at IPB University with a focus on Web Development.
+            Experienced in building real-world applications based on user needs and collaborating within
+            development teams. Skilled in developing end-to-end applications from frontend to backend, including
+            the design and integration of REST APIs. Technologies include React.js, Next.js, Laravel, and
+            Node.js, Python
             </motion.p>
 
             <motion.div variants={itemVariants}>
-              <button
-                disabled
-                className="inline-flex items-center gap-3 bg-gray-500 text-gray-300 font-bold py-3 px-8 rounded-full cursor-not-allowed"
+              {/* Menggunakan tag <a> alih-alih <button> */}
+              <a
+                href="/assets/cv/CV_Rival_Fitrah.pdf" // Harus sesuai dengan nama file di folder public
+                download="CV_Rival_Fitrah_Dermawan.pdf" // Opsional: Nama file yang akan muncul saat diunduh pengguna
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download My CV
-              </button>
+              </a>
             </motion.div>
           </div>
 

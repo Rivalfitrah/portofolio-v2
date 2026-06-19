@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Github, Link } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { Project } from "@/data/projects"; // Sesuaikan path alias jika berbeda
+import { Project } from "@/data/projects";
 
 interface ProjectCardProps {
   project: Project;
@@ -18,12 +18,16 @@ function ProjectCard({ project }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="border border-cyan-200 rounded-xl"
+      // 1. Tambahkan h-full agar card mengikuti tinggi maksimal dari baris grid
+      className="border border-cyan-200 rounded-xl h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="p-2 bg-[#0f0f0f] rounded-xl shadow-md hover:shadow-blue-500/40 transition duration-300">
-        <div className="relative group overflow-hidden rounded-xl">
+      {/* 2. Tambahkan flex flex-col dan h-full di bungkus utama ini */}
+      <div className="p-2 bg-[#0f0f0f] rounded-xl shadow-md hover:shadow-blue-500/40 transition duration-300 flex flex-col h-full">
+        
+        {/* Bagian Gambar (Tetap sama) */}
+        <div className="relative group overflow-hidden rounded-xl shrink-0">
           <Image
             src={project.imageSrc}
             alt={project.title}
@@ -81,11 +85,17 @@ function ProjectCard({ project }: ProjectCardProps) {
           </AnimatePresence>
         </div>
 
-        {/* Deskripsi Proyek */}
-        <div className="p-4">
-          <h3 className="font-bold text-white text-lg">{project.title}</h3>
-          <p className="text-gray-400 text-sm mt-1">{project.description}</p>
+        {/* 3. Deskripsi Proyek (Tambahkan flex-grow) */}
+        <div className="p-4 flex flex-col flex-grow">
+          {/* Tambahkan line-clamp-2 pada judul jika ingin judul yang panjang juga terpotong (opsional) */}
+          <h3 className="font-bold text-white text-lg line-clamp-2">{project.title}</h3>
+          
+          {/* 4. Tambahkan line-clamp-3 pada deskripsi */}
+          <p className="text-gray-400 text-sm mt-2 line-clamp-3">
+            {project.description}
+          </p>
         </div>
+
       </div>
     </motion.div>
   );
