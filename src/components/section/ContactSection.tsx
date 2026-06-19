@@ -2,8 +2,13 @@
 import { easeInOut, motion } from "framer-motion";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import { useState } from "react";
+
 
 function ContactSection() {
+  const [submitting, setSubmitting] = useState(false);
+
+
   const formContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,6 +35,7 @@ function ContactSection() {
 
   const handleSubmitEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setSubmitting(true)
 
     const form = e.currentTarget
     const formData = new FormData(form)
@@ -57,6 +63,8 @@ function ContactSection() {
         icon: "error",
         confirmButtonText: "OK",
       })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -136,7 +144,14 @@ function ContactSection() {
             </motion.div>
             <motion.button type="submit" variants={formItemVariants} className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group"
               >
-              Send Message
+              {submitting ? (
+                <span className="flex items-center">
+                  <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+                  Sending...
+                </span>
+              ) : (
+                "Send Message"
+              )}
               <span className="group-hover:translate-x-1 transition-transform duration-300">
                 →
               </span>

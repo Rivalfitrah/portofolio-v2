@@ -61,7 +61,7 @@ export default function Footer() {
               <div className="space-y-3">
                 <a href="mailto:rivalfitrahdermawan@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors">
                   <Mail size={20} className="text-cyan-400" />
-                  <span>rivalfitrahdermawan@gmail.com</span>
+                  <span>rivalfitrah9@gmail.com</span>
                 </a>
                 <a href="https://www.instagram.com/_rvlfd_9/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
                   <Instagram size={20} className="text-cyan-400" />
