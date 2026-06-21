@@ -13,7 +13,7 @@ export interface Project {
 export const projectsData: Project[] = [
   {
     id: "limbara",
-    title: "Waste Detection AI",
+    title: "limbara",
     description: "AI-based waste detection system utilizing YOLOv8 and Gemini API.",
     imageSrc: "/img/projects/limbara.png",
     githubUrl: "https://github.com/zollahrp/limbara",

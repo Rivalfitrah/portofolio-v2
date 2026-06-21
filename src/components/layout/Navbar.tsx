@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { HoverBorderGradient } from '../ui/hover-border-gradient'
+import { HoverBorderGradient } from '@/components/ui/hover-border-gradient'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'

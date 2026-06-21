@@ -1,17 +1,34 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BotMessageSquare, Send, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendMessageToAI } from "@/app/services/chatAI";
+import ReactMarkdown from "react-markdown";
 
 export default function ChatbotWidget() {
   const [isVisible, setIsVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<{ role: string; text: string }[]>([
+  { role: "bot", text: "Hi, I'm valbot AI Assistant! 👋 Do you have any questions?" }
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // useRef untuk otomatis scroll ke bawah saat ada pesan baru
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]); 
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
 
     const handleScroll = () => {
-      // Mencegah widget menghilang jika modal chat sedang terbuka
       if (isOpen) return;
 
       setIsVisible(false);
@@ -30,6 +47,28 @@ export default function ChatbotWidget() {
     };
   }, [isOpen]);
 
+
+  // submit
+  const handlesubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+    const userMessage = input;
+    setInput("");
+    
+    // tampillin pesan user di chat
+    setMessages((prev) => [...prev, { role: "user", text: userMessage }]);
+    setIsLoading(true);
+
+    try {
+        const botReply = await sendMessageToAI(userMessage);
+        setMessages((prev) => [...prev, { role: "bot", text: botReply }]);
+      } catch (error) {
+        setMessages((prev) => [...prev, { role: "bot", text: "Maaf, terjadi kesalahan teknis saat menghubungi AI." }]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
   return (
     <>
     <AnimatePresence>
@@ -39,8 +78,6 @@ export default function ChatbotWidget() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          // Di mobile ditaruh agak ke atas (bottom-24) agar tidak menabrak SidebarNav.
-          // Di desktop (md) ditaruh persis di pojok kiri bawah (bottom-10 left-10).
           className="fixed bottom-24 right-4 md:bottom-30 md:right-10 z-50"
         >
           <button
@@ -102,34 +139,66 @@ export default function ChatbotWidget() {
               </div>
 
               {/* Area Teks Percakapan (Body) */}
-              <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-[#0f0f0f] flex flex-col">
-                {/* Balon Chat Bot (Pesan Selamat Datang) */}
-                <div className="flex justify-start">
-                  <div className="bg-gray-800 border border-gray-700 text-white text-sm p-3 rounded-2xl rounded-tl-sm max-w-[85%] leading-relaxed shadow-md">
-                    Hi, I'm Valbot AI Assistant! 👋 <br />
-                    Do you have any questions about his projects or tech stack?
+              <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-[#0f0f0f] flex flex-col scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+                {messages.map((msg, index) => (
+                  <div
+                    key={index}
+                    // Deteksi apakah pesan dari bot atau user untuk mengatur posisi (kiri/kanan)
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    <div
+                      // Styling berbeda untuk bot (abu-abu) dan user (cyan gradient)
+                      className={`text-sm p-3 max-w-[85%] leading-relaxed shadow-md ${
+                        msg.role === "user"
+                          ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-2xl rounded-tr-sm"
+                          : "bg-gray-800 border border-gray-700 text-gray-100 rounded-2xl rounded-tl-sm"
+                      }`}
+                    >
+                      {/* Gunakan ReactMarkdown agar cetak tebal/list dirender dengan benar */}
+                      {msg.role === "bot" ? (
+                         <div className="prose prose-invert prose-p:my-1 prose-sm max-w-none">
+                            <ReactMarkdown>{msg.text}</ReactMarkdown>
+                         </div>
+                      ) : (
+                        msg.text // Teks dari user cukup string biasa
+                      )}
+                    </div>
                   </div>
-                </div>
+                ))}
+
+                {/* Animasi Loading (Mengetik...) ketika bot sedang berpikir */}
+                {isLoading && (
+                   <div className="flex justify-start">
+                     <div className="bg-gray-800 border border-gray-700 p-3 rounded-2xl rounded-tl-sm flex gap-1 items-center h-10 shadow-md">
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+                     </div>
+                   </div>
+                )}
+                {/* Div kosong ini bertugas sebagai jangkar (anchor) untuk auto-scroll */}
+                <div ref={messagesEndRef} />
               </div>
 
-              {/* Area Input Pesan (Footer) */}
               <div className="p-3 bg-[#111111] border-t border-gray-800">
                 <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    // Logika pengiriman pesan akan ditaruh di sini nantinya
-                  }}
+                  // Panggil fungsi handle submit di sini
+                  onSubmit={handlesubmit}
                   className="flex items-center gap-2"
                 >
                   <input
                     type="text"
+                    // Sambungkan input dengan state
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    disabled={isLoading}
                     placeholder="Type your message..."
-                    className="flex-1 bg-[#1a1a1a] text-white text-sm border border-gray-700 rounded-full px-4 py-2.5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-gray-500"
+                    className="flex-1 bg-[#1a1a1a] text-white text-sm border border-gray-700 rounded-full px-4 py-2.5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-gray-500 disabled:opacity-50"
                   />
-                  {/* Tombol Kirim */}
                   <button
                     type="submit"
-                    className="p-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-full transition-colors flex-shrink-0"
+                    disabled={isLoading || !input.trim()} // Tombol mati kalau lagi loading atau input kosong
+                    className="p-2.5 bg-cyan-600 hover:bg-cyan-500 disabled:bg-gray-600 text-white rounded-full transition-colors flex-shrink-0"
                   >
                     <Send className="w-4 h-4 ml-0.5" />
                   </button>
